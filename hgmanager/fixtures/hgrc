@@ -1,0 +1,8 @@
+[web]
+contact = Anton Sakharov
+description = HGM - Mercurial Web Management Application
+allow_push = realsugar, magadan
+push_ssl = false
+allow_archive = zip
+allow_read = magadan, realsugar
+
