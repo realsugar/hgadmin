@@ -1,5 +1,13 @@
+{% extends "hgmanager/base.html" %}
+
+{% block content %}
+
 <table>
 {% for developer in developers %}
     <tr><td><a href="{{ developer.get_edit_url }}" >{{ developer.login }}</a></td></tr>
 {% endfor %}
 </table>
+
+<p><a href="/developer/add/">Add new developer...</a></p>
+    
+{% endblock %}

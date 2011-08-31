@@ -25,12 +25,19 @@ class DevelopersParserTest(unittest.TestCase):
 
 
 class DevelopersWriterTest(unittest.TestCase):
-    def test_htpasswd_command(self):
-        developer = Developer()
-        developer.set_login('realsugar')
-        developer.set_password('A1aaaaa')
-        command = DevelopersWriter.htpasswd_command(developer)
+    def setUp(self):
+        self.developer = Developer()
+        self.developer.set_login('realsugar')
+        self.developer.set_password('A1aaaaa')
+
+    def test_htpasswd_update_command(self):
+        command = DevelopersWriter.htpasswd_update_command(self.developer)
         expected = 'htpasswd -b ' + settings.PASSWORDS_PATH + ' realsugar A1aaaaa'
+        self.assertEqual(expected, command)
+
+    def test_htpasswd_delete_command(self):
+        command = DevelopersWriter.htpasswd_delete_command(self.developer)
+        expected = 'htpasswd -D ' + settings.PASSWORDS_PATH + ' realsugar'
         self.assertEqual(expected, command)
 
 

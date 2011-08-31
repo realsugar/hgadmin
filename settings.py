@@ -97,9 +97,15 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     #'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    #'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 )
+
+TTEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.messages.context_processors.messages',
+)
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 ROOT_URLCONF = 'hgm.urls'
 
@@ -107,6 +113,8 @@ ROOT_URLCONF = 'hgm.urls'
 TEMPLATE_DIRS = ('/Volumes/stuff/projects/hgm/templates',)
 
 INSTALLED_APPS = (
+    'django.contrib.messages',
+    'django.contrib.sessions',
     'hgmanager',
 )
 

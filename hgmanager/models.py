@@ -29,7 +29,7 @@ class Developer:
         return '/developer/edit/%s' % self.login()
 
     def save(self):
-        DevelopersWriter.write(self)
+        DevelopersWriter.update(self)
 
     def login(self):
         return self.__login

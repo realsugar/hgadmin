@@ -1,43 +1,41 @@
-from django.core import validators
 from django.http import Http404, HttpResponseRedirect
+from django.template.context import RequestContext
 from models import Developer
 from django.shortcuts import render_to_response
-from django import forms
+from django.contrib import messages
+from hgmanager.forms import DeveloperEditForm, DeveloperAddForm
 
+#
+# Developer CRUD
+#
 
-class DeveloperEditForm(forms.Form):
-    login = forms.CharField(required=False,
-                            label='Mercurial login',
-                            widget = forms.TextInput(attrs={'readonly':'readonly'}))
+def developer_add(request):
+    response = lambda form: render_to_response('hgmanager/developers_add.html', { 'form': form })
 
-    validator_list= [validators.MinLengthValidator(4),
-                      validators.MaxLengthValidator(32)]
+    if not request.POST:
+        form = DeveloperAddForm()
+        return response(form)
 
+    # Validating form and saving developer
+    form = DeveloperAddForm(request.POST)
+    if form.is_valid():
+        developer = Developer()
+        developer.set_login(form.cleaned_data['login'])
+        developer.set_password(form.cleaned_data['password'])
+        developer.save()
 
-    password = forms.CharField(max_length=32,
-                            label = 'New Mercurial password',
-                            widget = forms.PasswordInput(),
-                            validators=validator_list)
-    confirm = forms.CharField(max_length=32,
-                            label = 'Confirm password',
-                            widget= forms.PasswordInput(),
-                            validators=validator_list)
+        messages.success(request, 'Developer %s was added successfully.' % developer.login())
+        return HttpResponseRedirect('/developer/list')
 
-    def clean(self):
-        cleaned_data = self.cleaned_data
-        new_password = cleaned_data.get('password')
-        new_confirm = cleaned_data.get('confirm')
+    # Form is not valid
+    return response(form)
 
-        if new_confirm != new_password:
-            raise forms.ValidationError("Passwords does not match!")
-        
-        return cleaned_data
     
-
 def developer_list(request):
     developers = Developer.all()
     return render_to_response('hgmanager/developer_list.html',
-            { 'developers': developers })
+                              { 'developers': developers },
+                              context_instance=RequestContext(request))
 
 
 def developer_edit(request, login):
@@ -57,7 +55,13 @@ def developer_edit(request, login):
     if form.is_valid():
         developer.set_password(form.cleaned_data['password'])
         developer.save()
+
+        messages.success(request, 'Password updated for %s.' % login)
         return HttpResponseRedirect('/developer/list')
 
     # Form is not valid
     return response(form, login)
+
+
+def developer_delete(request, login):
+    pass

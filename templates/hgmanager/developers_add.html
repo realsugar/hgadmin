@@ -2,9 +2,7 @@
 
 {% block content %}
 
-<h1>Change password for {{ login }}</h1>
-
-<form action="/developer/edit/{{ login }}/" method="post">
+<form action="/developer/add/" method="post">
 {{ form.as_p }}
 <input type="submit" value="Save"/>
 </form>
