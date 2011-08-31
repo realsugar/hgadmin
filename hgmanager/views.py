@@ -10,7 +10,7 @@ from hgmanager.forms import DeveloperEditForm, DeveloperAddForm
 #
 
 def developer_add(request):
-    response = lambda form: render_to_response('hgmanager/developers_add.html', { 'form': form })
+    response = lambda form: render_to_response('hgmanager/developer_add.html', { 'form': form })
 
     if not request.POST:
         form = DeveloperAddForm()
@@ -64,4 +64,6 @@ def developer_edit(request, login):
 
 
 def developer_delete(request, login):
-    pass
+    messages.error(request, "This feature is to be implemented.")
+    return render_to_response('hgmanager/developer_delete.html',
+                              context_instance=RequestContext(request))

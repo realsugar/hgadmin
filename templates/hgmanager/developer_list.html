@@ -4,7 +4,12 @@
 
 <table>
 {% for developer in developers %}
-    <tr><td><a href="{{ developer.get_edit_url }}" >{{ developer.login }}</a></td></tr>
+    <tr>
+        <td>{{ developer.login }}</a></td>
+        <td><a href="{{ developer.get_edit_url }}">Edit password...</a></td>
+        <td><a href="{{ developer.get_delete_url }}">Delete...</a></td>
+        <td></td>
+    </tr>
 {% endfor %}
 </table>
 

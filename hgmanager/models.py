@@ -28,8 +28,14 @@ class Developer:
     def get_edit_url(self):
         return '/developer/edit/%s' % self.login()
 
+    def get_delete_url(self):
+        return '/developer/delete/%s' % self.login()
+
     def save(self):
         DevelopersWriter.update(self)
+
+    def delete(self):
+        DevelopersWriter.delete(self)
 
     def login(self):
         return self.__login

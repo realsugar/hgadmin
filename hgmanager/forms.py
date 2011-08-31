@@ -14,7 +14,7 @@ class DeveloperForm(forms.Form):
                             validators=validator_list)
     confirm = forms.CharField(max_length=32,
                             label = 'Confirm password',
-                            widget= forms.PasswordInput(),
+                            widget = forms.PasswordInput(),
                             validators=validator_list)
 
     def clean(self):
@@ -34,9 +34,4 @@ class DeveloperAddForm(DeveloperForm):
                         validators=[login_validator()])
 
 class DeveloperEditForm(DeveloperForm):
-    login = forms.CharField(required=False,
-                            label='Mercurial login',
-                            widget = forms.TextInput(attrs={'readonly':'readonly'}))
-
-
-
+    pass
