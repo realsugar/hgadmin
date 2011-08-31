@@ -2,9 +2,15 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>HGM - Developers</title>
+    <title>HGM - Mercurial Repository Manager</title>
 </head>
 <body>
+
+{% block header %}
+<h1>HGM - Mercurial Repository Manager</h1>
+
+<a href="/">Home</a>
+{% endblock %}
 
 {% if messages %}
 <ul class="messages">
@@ -17,5 +23,8 @@
 {% block content %}
 {% endblock %}
 
+{% block footer %}
+    <div class="footer">Copyright &copy {% now "Y" %}, <a href="http://mlsdev.com">MLSDev.com</a></div>
+{% endblock %}
 </body>
 </html>

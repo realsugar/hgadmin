@@ -71,3 +71,7 @@ class ProjectsWriterTest(unittest.TestCase):
 class ProjectTest(unittest.TestCase):
     pass
 
+
+class DeveloperValidatorTest(unittest.TestCase):
+    def test_developer_exists(self):
+        pass

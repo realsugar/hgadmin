@@ -4,6 +4,10 @@ from hgmanager.validators import password_validator, login_validator
 
 
 class DeveloperForm(forms.Form):
+    login = forms.CharField(label='Mercurial login',
+                        max_length=32,
+                        validators=[login_validator()])
+
     validator_list = [validators.MinLengthValidator(4),
                         validators.MaxLengthValidator(32),
                         password_validator()]
@@ -29,9 +33,9 @@ class DeveloperForm(forms.Form):
 
 
 class DeveloperAddForm(DeveloperForm):
-    login = forms.CharField(label='Mercurial login',
-                        max_length=32,
-                        validators=[login_validator()])
+    pass
 
 class DeveloperEditForm(DeveloperForm):
-    pass
+    login = forms.CharField(label='Mercurial login',
+                        max_length=32,
+                        widget = forms.TextInput(attrs={'readonly':'readonly'}))

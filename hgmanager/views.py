@@ -5,6 +5,10 @@ from django.shortcuts import render_to_response
 from django.contrib import messages
 from hgmanager.forms import DeveloperEditForm, DeveloperAddForm
 
+
+def index(request):
+    return render_to_response('hgmanager/index.html')
+
 #
 # Developer CRUD
 #
@@ -25,7 +29,7 @@ def developer_add(request):
         developer.save()
 
         messages.success(request, 'Developer %s was added successfully.' % developer.login())
-        return HttpResponseRedirect('/developer/list')
+        return HttpResponseRedirect('/developer/')
 
     # Form is not valid
     return response(form)
@@ -57,7 +61,7 @@ def developer_edit(request, login):
         developer.save()
 
         messages.success(request, 'Password updated for %s.' % login)
-        return HttpResponseRedirect('/developer/list')
+        return HttpResponseRedirect('/developer/')
 
     # Form is not valid
     return response(form, login)

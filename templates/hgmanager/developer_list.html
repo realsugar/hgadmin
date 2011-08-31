@@ -1,17 +1,21 @@
-{% extends "hgmanager/base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 
-<table>
-{% for developer in developers %}
-    <tr>
-        <td>{{ developer.login }}</a></td>
-        <td><a href="{{ developer.get_edit_url }}">Edit password...</a></td>
-        <td><a href="{{ developer.get_delete_url }}">Delete...</a></td>
-        <td></td>
-    </tr>
-{% endfor %}
-</table>
+{% if developers %}
+    <table>
+    {% for developer in developers %}
+        <tr>
+            <td>{{ developer.login }}</a></td>
+            <td><a href="{{ developer.get_edit_url }}">Edit password...</a></td>
+            <td><a href="{{ developer.get_delete_url }}">Delete...</a></td>
+            <td></td>
+        </tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <i>No developers yet.</i>
+{% endif %}
 
 <p><a href="/developer/add/">Add new developer...</a></p>
     
