@@ -1,3 +1,5 @@
+from hgmanager.developers_parser import DevelopersParser
+from hgmanager.developers_writer import DevelopersWriter
 
 class Developer:
     __login = None
@@ -5,7 +7,26 @@ class Developer:
 
     @staticmethod
     def all():
-        return DevelopersParser.parse()
+        list = DevelopersParser.parse()
+        result = []
+        for login in list:
+            developer = Developer()
+            developer.set_login(login)
+            result.append(developer)
+        return result
+
+    @staticmethod
+    def get_by_login(login):
+        result = None
+        developers = Developer.all()
+        for developer in developers:
+            if developer.login() == login:
+                result = developer
+                break
+        return result
+
+    def get_edit_url(self):
+        return '/developer/edit/%s' % self.login()
 
     def save(self):
         DevelopersWriter.write(self)

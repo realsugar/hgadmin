@@ -19,14 +19,9 @@ class DevelopersParserTest(unittest.TestCase):
 
     def test_parse_developers(self):
         developers = DevelopersParser.parse_developers(fixture_path() + PASSWORDS)
-
         self.assertEquals(2, len(developers))
-
-        realsugar = developers[0]
-        self.assertEqual('realsugar', realsugar.login())
-
-        magadan = developers[1]
-        self.assertEqual('magadan', magadan.login())
+        self.assertEqual('realsugar', developers[0])
+        self.assertEqual('magadan', developers[1])
 
 
 class DevelopersWriterTest(unittest.TestCase):

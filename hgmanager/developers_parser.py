@@ -1,4 +1,3 @@
-from hgmanager.models import Developer
 import settings
 
 class DevelopersParser:
@@ -9,9 +8,7 @@ class DevelopersParser:
         for line in file:
             login = line.split(':')[0]
             if (login):
-                developer = Developer()
-                developer.set_login(login)
-                result.append(developer)
+                result.append(login)
         return result
 
     @staticmethod

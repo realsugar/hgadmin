@@ -12,4 +12,4 @@ class DevelopersWriter:
     @staticmethod
     def write(developer):
         command = DevelopersWriter.htpasswd_command(developer)
-        return call([command])
+        return call(command.split(' '))

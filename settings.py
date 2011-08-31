@@ -1,4 +1,5 @@
 # Django settings for hgm project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -95,23 +96,17 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
 ROOT_URLCONF = 'hgm.urls'
 
-# FIXME!
+
 TEMPLATE_DIRS = ('/Volumes/stuff/projects/hgm/templates',)
 
 INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    #'django.contrib.sites',
-    #'django.contrib.messages',
-    #'django.contrib.staticfiles',
     'hgmanager',
 )
 

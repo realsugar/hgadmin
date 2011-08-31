@@ -1,0 +1,5 @@
+<table>
+{% for developer in developers %}
+    <tr><td><a href="{{ developer.get_edit_url }}" >{{ developer.login }}</a></td></tr>
+{% endfor %}
+</table>
