@@ -1,5 +1,4 @@
-from django.core.validators import ValidatioRegexValidator
-from django.core.validators import ValidationError
+from django.core.validators import RegexValidator, ValidationError
 from models import Developer
 
 # Letters, numbers, dashes, underscores, dots, +, !
@@ -13,5 +12,7 @@ def login_validator():
                               message="Only letters, numbers, dashes, underscores and dots allowed.")
 
 # TODO: implement me!
-def developer_exists_validator(developer):
+def developer_exists_validator(developer_login):
+    if Developer.get_by_login(developer_login):
+        raise ValidationError("Developer %s already exists!" % developer_login)
     return None

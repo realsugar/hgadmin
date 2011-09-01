@@ -1,12 +1,12 @@
 from django.core import validators
 from django import forms
-from hgmanager.validators import password_validator, login_validator
+from hgmanager.validators import *
 
 
 class DeveloperForm(forms.Form):
     login = forms.CharField(label='Mercurial login',
                         max_length=32,
-                        validators=[login_validator()])
+                        validators=[login_validator(), developer_exists_validator])
 
     validator_list = [validators.MinLengthValidator(4),
                         validators.MaxLengthValidator(32),

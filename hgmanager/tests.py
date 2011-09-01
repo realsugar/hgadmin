@@ -74,4 +74,5 @@ class ProjectTest(unittest.TestCase):
 
 class DeveloperValidatorTest(unittest.TestCase):
     def test_developer_exists(self):
+        # TODO: mock Developer.get_by_login to return developer
         pass
