@@ -2,10 +2,10 @@
 
 {% block content %}
 
-<form action="/developer/add/" method="post">
+<form action="{% url developers-add %}" method="post">
 {{ form.as_p }}
 <input type="submit" value="Save"/>
-<a href="/developer/">Back</a>
+<a href="{% url developers-list %}">Back</a>
 </form>
 
 {% endblock %}

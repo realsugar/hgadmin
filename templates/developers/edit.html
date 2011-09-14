@@ -4,10 +4,10 @@
 
 <h1>Change password for {{ login }}</h1>
 
-<form action="/developer/edit/{{ login }}/" method="post">
+<form action="/{% url developers-edit login %}/" method="post">
 {{ form.as_p }}
 <input type="submit" value="Save"/>
-<a href="/developer/">Back</a>
+<a href="{% url developers-list %}">Back</a>
 </form>
 
 {% endblock %}

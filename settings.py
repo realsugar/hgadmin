@@ -109,13 +109,15 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 ROOT_URLCONF = 'hgm.urls'
 
-
-TEMPLATE_DIRS = ('/Volumes/stuff/projects/hgm/templates',)
+TEMPLATE_DIRS = (
+    os.path.join(os.path.dirname(__file__), 'templates/').replace('\\','/'),
+)
 
 INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sessions',
-    'hgmanager',
+    'developers',
+    'projects',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -143,3 +145,5 @@ LOGGING = {
 
 REPOS_ROOT = '/var/hg/repos'
 PASSWORDS_PATH = '/etc/apache2/passwords'
+
+FIXTURE_PATH = os.path.join(os.path.dirname(__file__), 'fixtures/').replace('\\','/')

@@ -1,6 +1,6 @@
 from django.core import validators
 from django import forms
-from hgmanager.validators import *
+from validators import *
 
 
 class DeveloperForm(forms.Form):

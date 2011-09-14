@@ -1,5 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.views.generic.simple import direct_to_template
 
 urlpatterns = patterns('',
-    (r'^', include('hgmanager.urls')),
+    url(r'^$', direct_to_template, {'template': 'index.html'}),
+    (r'^developers/', include('developers.urls')),
 )
