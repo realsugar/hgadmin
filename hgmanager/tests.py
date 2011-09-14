@@ -1,10 +1,11 @@
-import unittest
+import unittest2 as unittest
 import os
 from developers_parser import DevelopersParser
 from developers_writer import DevelopersWriter
 from projects_parser import ProjectsParser
-from models import Developer
+from validators import *
 import settings
+from mock import Mock, patch, sentinel
 
 # Fixtures
 PASSWORDS = "passwords"
@@ -24,20 +25,23 @@ class DevelopersParserTest(unittest.TestCase):
         self.assertEqual('magadan', developers[1])
 
 
+
 class DevelopersWriterTest(unittest.TestCase):
     def setUp(self):
-        self.developer = Developer()
-        self.developer.set_login('realsugar')
-        self.developer.set_password('A1aaaaa')
+        self.developer = Mock()
+        self.developer.login.return_value = 'realsugar'
+        self.developer.password.return_value = 'A1aaaaa'
 
     def test_htpasswd_update_command(self):
         command = DevelopersWriter.htpasswd_update_command(self.developer)
         expected = 'htpasswd -b ' + settings.PASSWORDS_PATH + ' realsugar A1aaaaa'
+        self.developer.assert_has_calls([('login',), ('password',)], any_order=True)
         self.assertEqual(expected, command)
 
     def test_htpasswd_delete_command(self):
         command = DevelopersWriter.htpasswd_delete_command(self.developer)
         expected = 'htpasswd -D ' + settings.PASSWORDS_PATH + ' realsugar'
+        self.developer.assert_has_calls([('login',)], any_order=True)
         self.assertEqual(expected, command)
 
 
@@ -74,5 +78,7 @@ class ProjectTest(unittest.TestCase):
 
 class DeveloperValidatorTest(unittest.TestCase):
     def test_developer_exists(self):
-        # TODO: mock Developer.get_by_login to return developer
+        pass
+
+    def test_developer_does_not_exist(self):
         pass

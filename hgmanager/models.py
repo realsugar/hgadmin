@@ -1,6 +1,10 @@
 from hgmanager.developers_parser import DevelopersParser
 from hgmanager.developers_writer import DevelopersWriter
 
+#
+# Developer Model
+#
+
 class Developer:
     __login = None
     __password = None
@@ -52,6 +56,10 @@ class Developer:
     def __unicode__(self):
         return self.login()
 
-    
+
+#
+# Project Model
+#
+
 class Project:
     pass

@@ -71,3 +71,12 @@ def developer_delete(request, login):
     messages.error(request, "This feature is to be implemented.")
     return render_to_response('hgmanager/developer_delete.html',
                               context_instance=RequestContext(request))
+
+
+#
+# Project CRUD
+#
+
+def project_list(request):
+    # TODO: implement me!
+    return Http404()

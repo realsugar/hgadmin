@@ -11,7 +11,6 @@ def login_validator():
         return RegexValidator(regex='^[A-Za-z0-9\-_\.]+$',
                               message="Only letters, numbers, dashes, underscores and dots allowed.")
 
-# TODO: implement me!
 def developer_exists_validator(developer_login):
     if Developer.get_by_login(developer_login):
         raise ValidationError("Developer %s already exists!" % developer_login)
