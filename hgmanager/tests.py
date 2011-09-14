@@ -13,7 +13,7 @@ HGRC = "hgrc"
 
 
 def fixture_path():
-    return os.path.join(os.path.dirname(__file__), 'fixtures/').replace('\\','/')
+    return os.path.join(os.path.dirname(__file__), '../fixtures/').replace('\\','/')
 
 
 class DevelopersParserTest(unittest.TestCase):
