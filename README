@@ -1,0 +1,18 @@
+
+HGM - Mercurial Repository Manager
+
+by Anton Sakharov
+(c) MLSDev.com, 2011
+
+
+Frameworks:
+ - Django 1.3+
+ - unittest2
+ - mock
+ - fabric
+
+
+Additional Environment:
+ - Apache 2
+ - Mercurial
+
