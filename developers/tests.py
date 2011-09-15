@@ -1,8 +1,10 @@
 import re
 import unittest2 as unittest
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.http import HttpRequest
 import developers
+from developers.validators import developer_exists_validator
 from developers_parser import DevelopersParser
 from developers_writer import DevelopersWriter
 from views import *
@@ -44,12 +46,17 @@ class DevelopersWriterTest(unittest.TestCase):
         
 
 class DeveloperValidatorTest(unittest.TestCase):
-    def test_developer_exists(self):
-        pass
+    @patch.object(Developer, 'get_by_login')
+    def test_developer_exists(self, get_by_login):
+        get_by_login.return_value = 'realsugar'
+        self.assertRaises(ValidationError, developer_exists_validator, 'realsugar')
+        get_by_login.assert_called_once_with('realsugar')
 
-    def test_developer_does_not_exist(self):
-        pass
-
+    @patch.object(Developer, 'get_by_login')
+    def test_developer_does_not_exist(self, get_by_login):
+        get_by_login.return_value = None
+        self.assertIsNone(developer_exists_validator('valera'))
+        get_by_login.assert_called_once_with('valera')
 
 
 #

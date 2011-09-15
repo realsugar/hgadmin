@@ -1,6 +1,6 @@
 
 - tests for views
-- mocked tests for parsers, writers and validators
+- mocked tests for parsers, writers
 - 'projects' app
 - http basic auth
 - add fabric
