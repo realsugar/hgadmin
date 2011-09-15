@@ -1,16 +1,13 @@
 import re
 import unittest2 as unittest
 from django.core.exceptions import ValidationError
-from django.core.urlresolvers import reverse
-from django.http import HttpRequest
-import developers
 from developers.validators import developer_exists_validator
 from developers_parser import DevelopersParser
 from developers_writer import DevelopersWriter
 from views import *
 import settings
-from mock import Mock, sentinel, patch
-from forms import DeveloperAddForm
+from mock import Mock, patch
+from django.contrib import messages
 
 # Fixtures
 PASSWORDS = "passwords"
@@ -22,8 +19,6 @@ class DevelopersParserTest(unittest.TestCase):
         self.assertEquals(2, len(developers))
         self.assertEqual('realsugar', developers[0])
         self.assertEqual('magadan', developers[1])
-
-
 
 class DevelopersWriterTest(unittest.TestCase):
     def setUp(self):
@@ -73,7 +68,44 @@ class DeveloperViewTest(unittest.TestCase):
         pattern = '<form action="%s" method="post">' % reverse(developer_add)
         self.assertIsNotNone(re.search(pattern, response.content))
 
+    def test_developer_add_wrong_form(self):
+        # TODO: simulate wrong/empty form submission
+        # and returning error messages
+        pass
+
+    def test_developer_add_correct_form(self):
+        # TODO: simulate correct form submission
+        # and adding new developer
+        pass
+
+    @patch.object(Developer, 'get_by_login')
+    def test_developer_edit_not_exists(self, get_by_login):
+        get_by_login.return_value = None
+        request = Mock()
+        response = developer_edit(request, 'valera')
+        get_by_login.assert_called_once_with('valera')
+        self.assertIs(Http404, response)
+
+    @patch.object(Developer, 'get_by_login')
+    def test_developer_edit_GET(self, get_by_login):
+        request = Mock()
+        request.POST = None
+
+        developer_instance = Mock()
+        developer_instance.login = 'realsugar'
+        get_by_login.return_value = developer_instance
+
+        response = developer_edit(request, 'realsugar')
+        self.assertEqual(200, response.status_code)
+        pattern = '<form action="%s" method="post">' % reverse(developer_edit, args=['realsugar'])
+        self.assertIsNotNone(re.search(pattern, response.content))
+
+        get_by_login.assert_called_once_with('realsugar')
 
 
-
-
+    @patch.object(messages, 'error')
+    def test_developer_delete_not_implemented(self, error_mock):
+        request = Mock()
+        response = developer_delete(request, 'realsugar')
+        error_mock.assert_called_once_with(request, 'This feature is to be implemented.')
+        self.assertEqual(200, response.status_code)

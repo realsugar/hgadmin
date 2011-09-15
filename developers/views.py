@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse
-from django.http import Http404, HttpResponseRedirect, HttpResponse
+from django.http import Http404, HttpResponseRedirect
 from django.template.context import RequestContext
 import developers
 from models import Developer

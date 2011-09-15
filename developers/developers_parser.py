@@ -1,5 +1,6 @@
 import settings
 
+
 class DevelopersParser:
     @staticmethod
     def parse_developers(path):
