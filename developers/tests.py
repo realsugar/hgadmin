@@ -1,15 +1,20 @@
+import re
 import unittest2 as unittest
+from django.core.urlresolvers import reverse
+from django.http import HttpRequest
+import developers
 from developers_parser import DevelopersParser
 from developers_writer import DevelopersWriter
+from views import *
 import settings
-from mock import Mock
+from mock import Mock, sentinel, patch
+from forms import DeveloperAddForm
 
 # Fixtures
 PASSWORDS = "passwords"
 
 
 class DevelopersParserTest(unittest.TestCase):
-
     def test_parse_developers(self):
         developers = DevelopersParser.parse_developers(settings.FIXTURE_PATH + PASSWORDS)
         self.assertEquals(2, len(developers))
@@ -33,7 +38,7 @@ class DevelopersWriterTest(unittest.TestCase):
     def test_htpasswd_delete_command(self):
         command = DevelopersWriter.htpasswd_delete_command(self.developer)
         expected = 'htpasswd -D ' + settings.PASSWORDS_PATH + ' realsugar'
-        self.developer.assert_has_calls([('login',)], any_order=True)
+        self.developer.assert_has_calls([('login',)])
         self.assertEqual(expected, command)
 
         
@@ -44,3 +49,24 @@ class DeveloperValidatorTest(unittest.TestCase):
 
     def test_developer_does_not_exist(self):
         pass
+
+
+
+#
+# Tests for views
+#
+
+class DeveloperViewTest(unittest.TestCase):
+    def test_developer_add_GET(self):
+        request = Mock()
+        request.POST = None
+        response = developer_add(request)
+
+        self.assertEqual(200, response.status_code)
+        pattern = '<form action="%s" method="post">' % reverse(developer_add)
+        self.assertIsNotNone(re.search(pattern, response.content))
+
+
+
+
+

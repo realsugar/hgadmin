@@ -1,9 +1,15 @@
-from django.http import Http404, HttpResponseRedirect
+from django.core.urlresolvers import reverse
+from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.template.context import RequestContext
+import developers
 from models import Developer
 from django.shortcuts import render_to_response
 from django.contrib import messages
 from forms import DeveloperEditForm, DeveloperAddForm
+
+
+def back_to_developer_list():
+    return HttpResponseRedirect(reverse(developer_list))
 
 
 def developer_add(request):
@@ -12,6 +18,7 @@ def developer_add(request):
     if not request.POST:
         form = DeveloperAddForm()
         return response(form)
+
 
     # Validating form and saving developer
     form = DeveloperAddForm(request.POST)
@@ -23,8 +30,7 @@ def developer_add(request):
 
         messages.success(request, 'Developer %s was added successfully.' % developer.login())
 
-        # FIXME: use reverse()
-        return HttpResponseRedirect('/developers/')
+        return back_to_developer_list()
 
     # Form is not valid
     return response(form)
@@ -57,8 +63,7 @@ def developer_edit(request, login):
 
         messages.success(request, 'Password updated for %s.' % login)
 
-        # FIXME: use reverse()
-        return HttpResponseRedirect('/developers/')
+        return back_to_developer_list()
 
     # Form is not valid
     return response(form, login)
