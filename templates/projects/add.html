@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Add new repository</h2>
+
+<form action="{% url projects-add %}" method="post">
+
+{% include "projects/project_form.html" %}
+
+</form>
+
+<a href="{% url projects-list %}">Back</a>
+
+{% endblock %}

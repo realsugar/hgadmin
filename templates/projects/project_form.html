@@ -1,0 +1,18 @@
+{{ form.non_field_errors }}
+
+<table>
+{% for field in form %}
+    <tr><td colspan="3">
+        {{ field.errors }}
+    </td></tr>
+
+    <tr>
+        <td>{{ field.label_tag }}</td>
+        <td> : </td>
+        <td>{{ field }}</td>
+    </tr>
+        
+{% endfor %}
+</table>
+
+<p><input type="submit" value="Save"/></p>

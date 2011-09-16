@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.http import Http404
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
+from projects.forms import ProjectForm
 from projects.models import Project
 
 
@@ -10,6 +11,9 @@ def project_list(request):
     return render_to_response('projects/list.html', {'projects': projects})
 
 def project_add(request):
+    if not request.POST:
+        form = ProjectForm()
+        return render_to_response('projects/add.html', {'form': form})
     return None
 
 def project_edit(request, name):
