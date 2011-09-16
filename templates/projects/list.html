@@ -15,6 +15,9 @@
         </tr>
     {% endfor %}
     </table>
+
+    Total repositories: {{ projects|length }}
+
 {% else %}
     <i>No repositories yet.</i>
 {% endif %}

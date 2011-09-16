@@ -46,7 +46,7 @@ def developer_add(request):
 def developer_profile(request, login):
     developer = Developer.get_by_login(login)
     if not developer:
-        return Http404
+        raise Http404
 
     return render_to_response('developers/profile.html', {'developer': developer})
 
@@ -54,7 +54,7 @@ def developer_profile(request, login):
 def developer_password(request, login):
     developer = Developer.get_by_login(login)
     if not developer:
-        return Http404
+        raise Http404
 
     response = lambda form, login: render_to_response('developers/password.html',
         { 'form' : form, 'login': login })

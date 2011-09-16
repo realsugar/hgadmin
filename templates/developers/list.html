@@ -5,6 +5,8 @@
 <h2>All developers</h2>
 
 {% if developers %}
+
+
     <table class="bordered">
     {% for developer in developers %}
         <tr class="bordered">
@@ -15,6 +17,9 @@
         </tr>
     {% endfor %}
     </table>
+
+    Total developers: {{ developers|length }}
+    
 {% else %}
     <i>No developers yet.</i>
 {% endif %}

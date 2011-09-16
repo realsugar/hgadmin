@@ -51,6 +51,12 @@ class ProjectViewTest(unittest.TestCase):
         self.assertEqual(200, response.status_code)
         self.assertNotEqual(-1, response.content.find('No repositories yet.'))
 
+    @patch.object(Project, 'get_by_name')
+    def test_project_details_not_found(self, get_by_name):
+        get_by_name.return_value = None
+        self.assertRaises(Http404, project_details, request=None, name='bitbucket')
+        get_by_name.assert_called_once_with('bitbucket')
+
 
     @patch.object(messages, 'error')
     def test_developer_delete_not_implemented(self, error_mock):

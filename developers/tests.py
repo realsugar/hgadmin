@@ -95,10 +95,10 @@ class DeveloperViewTest(unittest.TestCase):
     def test_developer_password_not_exists(self, get_by_login):
         get_by_login.return_value = None
         request = Mock()
-        response = developer_password(request, 'valera')
+        self.assertRaises(Http404, developer_password, request=request, login='valera')
         get_by_login.assert_called_once_with('valera')
-        self.assertIs(Http404, response)
-
+        
+        
     @patch.object(Developer, 'get_by_login')
     def test_developer_password_GET(self, get_by_login):
         request = Mock()
