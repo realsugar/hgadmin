@@ -5,13 +5,12 @@
 <h2>All repositories</h2>
 
 {% if projects %}
-    <table>
+    <table class="bordered">
     {% for project in projects %}
-        <tr>
+        <tr class="bordered">
             <td class="wide_column bold">{{ project.name }}</a></td>
             <td><a href="{% url projects-edit project.name %}">Edit settings...</a></td>
             <td><a href="{% url projects-delete project.name %}">Delete...</a></td>
-            <td></td>
         </tr>
     {% endfor %}
     </table>

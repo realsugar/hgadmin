@@ -5,13 +5,12 @@
 <h2>All developers</h2>
 
 {% if developers %}
-    <table>
+    <table class="bordered">
     {% for developer in developers %}
-        <tr>
+        <tr class="bordered">
             <td class="wide_column bold">{{ developer.login }}</a></td>
             <td><a href="{% url developers-edit developer.login %}">Edit password...</a></td>
             <td><a href="{% url developers-delete developer.login %}">Delete...</a></td>
-            <td></td>
         </tr>
     {% endfor %}
     </table>
