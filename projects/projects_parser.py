@@ -1,4 +1,4 @@
-from models import Project
+import os
 
 class ProjectsParser:
     @staticmethod
@@ -13,10 +13,22 @@ class ProjectsParser:
         return result
 
     @staticmethod
-    def parse_developers(dictionary, role_name):
-        developers = dictionary[role_name].split(',')
+    def parse_list(dictionary, list_name):
+        items = dictionary[list_name].split(',')
         result = []
-        for developer in developers:
-            result.append(developer.strip())
+        for item in items:
+            result.append(item.strip())
         return result
+
+    @staticmethod
+    def parse_project(full_path):
+        hgrc = os.path.join(full_path, '.hg/hgrc')
+        file = open(hgrc, 'r')
+        lines =  file.readlines()
+        file.close()
+        dictionary = ProjectsParser.parse_lines(lines)
+        return dictionary
+
+
+
         

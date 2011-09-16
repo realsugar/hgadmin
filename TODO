@@ -1,6 +1,7 @@
 
 - tests for views
 - mocked tests for parsers, writers
-- 'projects' app
+- breadcrumbs
 - http basic auth
-- add fabric
+
+[done] add fabric

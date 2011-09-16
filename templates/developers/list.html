@@ -9,8 +9,9 @@
     {% for developer in developers %}
         <tr class="bordered">
             <td class="wide_column bold">{{ developer.login }}</a></td>
-            <td><a href="{% url developers-edit developer.login %}">Edit password...</a></td>
-            <td><a href="{% url developers-delete developer.login %}">Delete...</a></td>
+            <td><a href="{% url developer-profile developer.login %}">Profile</a></td>
+            <td><a href="{% url developer-password developer.login %}">Change password</a></td>
+            <td><a href="{% url developer-delete developer.login %}">Delete</a></td>
         </tr>
     {% endfor %}
     </table>
@@ -18,6 +19,6 @@
     <i>No developers yet.</i>
 {% endif %}
 
-<p><a href="{% url developers-add %}">Add new developer...</a></p>
+<p><a href="{% url developer-add %}">Add new developer...</a></p>
     
 {% endblock %}

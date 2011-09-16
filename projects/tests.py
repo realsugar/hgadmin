@@ -24,11 +24,11 @@ class ProjectsParserTest(unittest.TestCase):
         self.assertEqual('HGM - Mercurial Web Management Application', self.dictionary.get('description'))
 
     def test_parse_readers(self):
-        readers = ProjectsParser.parse_developers(self.dictionary, 'allow_read')
+        readers = ProjectsParser.parse_list(self.dictionary, 'allow_read')
         self.assertTrue('realsugar' in readers)
 
     def test_parse_pushers(self):
-        pushers = ProjectsParser.parse_developers(self.dictionary, 'allow_push')
+        pushers = ProjectsParser.parse_list(self.dictionary, 'allow_push')
         self.assertTrue('magadan' in pushers)
         self.assertTrue('realsugar' in pushers)
 
@@ -45,7 +45,7 @@ class ProjectViewTest(unittest.TestCase):
     @patch.object(Project, 'all')
     def test_project_list_no_projects_yet(self, all_projects):
         all_projects.return_value = []
-        response = project_list(None)
+        response = projects_list(None)
         all_projects.assert_called_once()
 
         self.assertEqual(200, response.status_code)

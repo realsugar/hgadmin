@@ -6,9 +6,18 @@ from projects.forms import ProjectForm
 from projects.models import Project
 
 
-def project_list(request):
+def projects_list(request):
     projects = Project.all()
     return render_to_response('projects/list.html', {'projects': projects})
+
+
+def project_details(request, name):
+    project = Project.get_by_name(name)
+    if not project:
+        return Http404
+
+    return render_to_response('projects/details.html', {'project': project})
+
 
 def project_add(request):
     if not request.POST:
@@ -16,8 +25,13 @@ def project_add(request):
         return render_to_response('projects/add.html', {'form': form})
     return None
 
+
 def project_edit(request, name):
+    project = Project.get_by_name(name)
+    if not project:
+        return Http404
     return None
+
 
 def project_delete(request, name):
     messages.error(request, "This feature is to be implemented.")

@@ -8,8 +8,15 @@ from django.contrib import messages
 from forms import DeveloperEditForm, DeveloperAddForm
 
 
-def back_to_developer_list():
-    return HttpResponseRedirect(reverse(developer_list))
+def back_to_developers_list():
+    return HttpResponseRedirect(reverse(developers_list))
+
+
+def developers_list(request):
+    developers = Developer.all()
+    return render_to_response('developers/list.html',
+                              { 'developers': developers },
+                              context_instance=RequestContext(request))
 
 
 def developer_add(request):
@@ -30,25 +37,26 @@ def developer_add(request):
 
         messages.success(request, 'Developer %s was added successfully.' % developer.login())
 
-        return back_to_developer_list()
+        return back_to_developers_list()
 
     # Form is not valid
     return response(form)
 
 
-def developer_list(request):
-    developers = Developer.all()
-    return render_to_response('developers/list.html',
-                              { 'developers': developers },
-                              context_instance=RequestContext(request))
-
-
-def developer_edit(request, login):
+def developer_profile(request, login):
     developer = Developer.get_by_login(login)
     if not developer:
         return Http404
 
-    response = lambda form, login: render_to_response('developers/edit.html',
+    return render_to_response('developers/profile.html', {'developer': developer})
+
+
+def developer_password(request, login):
+    developer = Developer.get_by_login(login)
+    if not developer:
+        return Http404
+
+    response = lambda form, login: render_to_response('developers/password.html',
         { 'form' : form, 'login': login })
 
     if not request.POST:
@@ -63,7 +71,7 @@ def developer_edit(request, login):
 
         messages.success(request, 'Password updated for %s.' % login)
 
-        return back_to_developer_list()
+        return back_to_developers_list()
 
     # Form is not valid
     return response(form, login)

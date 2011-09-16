@@ -8,7 +8,7 @@ class Developer:
 
     @staticmethod
     def all():
-        list = DevelopersParser.parse()
+        list = sorted(DevelopersParser.parse())
         result = []
         for login in list:
             developer = Developer()

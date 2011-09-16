@@ -9,8 +9,9 @@
     {% for project in projects %}
         <tr class="bordered">
             <td class="wide_column bold">{{ project.name }}</a></td>
-            <td><a href="{% url projects-edit project.name %}">Edit settings...</a></td>
-            <td><a href="{% url projects-delete project.name %}">Delete...</a></td>
+            <td><a href="{%  url project-details project.name %}">View details</a> </td>
+            <td><a href="{% url project-edit project.name %}">Edit settings</a></td>
+            <td><a href="{% url project-delete project.name %}">Delete</a></td>
         </tr>
     {% endfor %}
     </table>
@@ -18,6 +19,6 @@
     <i>No repositories yet.</i>
 {% endif %}
 
-<p><a href="{% url projects-add %}">Add new repository...</a></p>
+<p><a href="{% url project-add %}">Add new repository...</a></p>
 
 {% endblock %}

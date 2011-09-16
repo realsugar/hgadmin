@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>{{ project.name }} repository details</h2>
+
+<table class="bordered">
+    <tr>
+        <td>Full path:</td>
+        <td>{{ project.full_path }}</td>
+    </tr>
+
+    <tr>
+        <td>Contact:</td>
+        <td>{{ project.contact }}</td>
+    </tr>
+
+    <tr>
+        <td>Description:</td>
+        <td>{{ project.description }}</td>
+    </tr>
+
+    <tr>
+        <td>Allow archive:</td>
+        <td>{{ project.html_allow_archive }}</td>
+    </tr>
+
+    <tr>
+        <td>Allow push:</td>
+        <td>
+            {% for developer in project.allow_push %}
+                <a href="{% url developer-profile developer %}">{{ developer }}</a>&nbsp;
+            {% endfor %}
+        </td>
+    </tr>
+
+    <tr>
+        <td>Allow read:</td>
+        <td>
+            {% for developer in project.allow_push %}
+                <a href="{% url developer-profile developer %}">{{ developer }}</a>&nbsp;
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+
+<a href="{% url projects-list %}">Back</a> |
+<a href="{% url project-edit project.name %}">Edit</a> |
+<a href="{% url project-delete project.name %}">Delete</a>
+
+{% endblock %}

@@ -62,7 +62,7 @@ class DeveloperViewTest(unittest.TestCase):
     @patch.object(Developer, 'all')
     def test_developer_list_no_developers_yet(self, all_developers):
         all_developers.return_value = []
-        response = developer_list(None)
+        response = developers_list(None)
         all_developers.assert_called_once()
 
         self.assertEqual(200, response.status_code)
@@ -92,15 +92,15 @@ class DeveloperViewTest(unittest.TestCase):
         pass
 
     @patch.object(Developer, 'get_by_login')
-    def test_developer_edit_not_exists(self, get_by_login):
+    def test_developer_password_not_exists(self, get_by_login):
         get_by_login.return_value = None
         request = Mock()
-        response = developer_edit(request, 'valera')
+        response = developer_password(request, 'valera')
         get_by_login.assert_called_once_with('valera')
         self.assertIs(Http404, response)
 
     @patch.object(Developer, 'get_by_login')
-    def test_developer_edit_GET(self, get_by_login):
+    def test_developer_password_GET(self, get_by_login):
         request = Mock()
         request.POST = None
 
@@ -108,9 +108,9 @@ class DeveloperViewTest(unittest.TestCase):
         developer_instance.login = 'realsugar'
         get_by_login.return_value = developer_instance
 
-        response = developer_edit(request, 'realsugar')
+        response = developer_password(request, 'realsugar')
         self.assertEqual(200, response.status_code)
-        pattern = '<form action="%s" method="post">' % reverse(developer_edit, args=['realsugar'])
+        pattern = '<form action="%s" method="post">' % reverse(developer_password, args=['realsugar'])
         self.assertIsNotNone(re.search(pattern, response.content))
 
         get_by_login.assert_called_once_with('realsugar')
