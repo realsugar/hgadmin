@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<p>Manage repositories</p>
-<p><a href="{% url developers-list %}">Manage developers</a></p>
+
+<h2>What can I do here?</h2>
+
+<ul>
+    <li>Manage repositories</li>
+    <li><a href="{% url developers-list %}">Manage developers</a></li>
+</ul>
 {% endblock %}

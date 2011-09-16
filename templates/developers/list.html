@@ -2,11 +2,13 @@
 
 {% block content %}
 
+<h2>All developers</h2>
+
 {% if developers %}
     <table>
     {% for developer in developers %}
         <tr>
-            <td>{{ developer.login }}</a></td>
+            <td class="wide_column bold">{{ developer.login }}</a></td>
             <td><a href="{% url developers-edit developer.login %}">Edit password...</a></td>
             <td><a href="{% url developers-delete developer.login %}">Delete...</a></td>
             <td></td>

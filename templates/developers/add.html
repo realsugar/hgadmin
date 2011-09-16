@@ -2,10 +2,14 @@
 
 {% block content %}
 
+<h2>Add new developer</h2>
+
 <form action="{% url developers-add %}" method="post">
-{{ form.as_p }}
-<input type="submit" value="Save"/>
-<a href="{% url developers-list %}">Back</a>
+
+{% include "developers/developer_form.html" %}
+
 </form>
+
+<a href="{% url developers-list %}">Back</a>
 
 {% endblock %}

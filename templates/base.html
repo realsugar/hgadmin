@@ -2,14 +2,98 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>HGM - Mercurial Repository Manager</title>
+<title>HGM - Mercurial Repository Manager</title>
+<style type="text/css">
+body {
+    font-family: Tahoma, Verdana, Arial;
+    font-size: 12pt;
+    color: #000;
+}
+
+a {
+  color: #2B587A;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  border-bottom: 1px solid #DAE1E8;
+  color: #45668E;
+  font-size: 14pt;
+  padding: 0px 0px 3px;
+  margin: 0px 0px 10px;
+}
+
+h2 {
+  color: #45668E;
+  font-size: 13pt;
+  padding: 0px 0px 3px;
+  margin: 0px 0px 10px;
+}
+
+input[type="text"],
+input[type="submit"],
+input[type="button"],
+input[type="search"],
+input[type="password"],
+input[type~="text"],
+input[type~="search"],
+input[type~="password"],
+input[type~="email"] {
+  font-size: 11px;
+  font-family: Tahoma, Verdana, Arial;
+}
+
+div.footer {
+    border-top: 1px solid #DAE1E8;
+    color: #45668E;
+    font-size: 10pt;
+}
+
+td {
+    padding-left: 0px;
+    padding-right: 8px;
+}
+
+td.wide_column {
+    width: 128pt;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+ul.errorlist, li.success, li.error {
+    padding-left: 1em;
+    font-size: 11px;
+}
+
+ul.errorlist,  li.error {
+    color: red;
+}
+
+li.success {
+    color: green;
+}
+
+
+</style>
 </head>
 <body>
+
+<div align="center">
+<div class="content" style="width: 800px; text-align: left;">
 
 {% block header %}
 <h1>HGM - Mercurial Repository Manager</h1>
 
 <a href="/">Home</a>
+<p/>
+
 {% endblock %}
 
 {% if messages %}
@@ -23,8 +107,14 @@
 {% block content %}
 {% endblock %}
 
+<p/>
+
 {% block footer %}
     <div class="footer">Copyright &copy {% now "Y" %}, <a href="http://mlsdev.com">MLSDev.com</a></div>
 {% endblock %}
+
+</div>
+</div>
+
 </body>
 </html>
