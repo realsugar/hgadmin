@@ -27,5 +27,6 @@ def deploy():
 Commands
 """
 def update():
+    run('hg pull')
     run('hg update')
     run('apache2ctl restart')
