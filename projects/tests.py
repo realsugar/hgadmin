@@ -1,7 +1,10 @@
+from django.contrib import messages
+from mock import Mock, patch
 import unittest2 as unittest
+from projects.models import Project
 from projects.projects_parser import ProjectsParser
 import settings
-
+from views import *
 
 # Fixtures
 HGRC = "hgrc"
@@ -36,3 +39,25 @@ class ProjectsWriterTest(unittest.TestCase):
 
 class ProjectTest(unittest.TestCase):
     pass
+
+
+class ProjectViewTest(unittest.TestCase):
+    @patch.object(Project, 'all')
+    def test_project_list_no_projects_yet(self, all_projects):
+        all_projects.return_value = []
+        response = project_list(None)
+        all_projects.assert_called_once()
+
+        self.assertEqual(200, response.status_code)
+        self.assertNotEqual(-1, response.content.find('No repositories yet.'))
+
+
+    @patch.object(messages, 'error')
+    def test_developer_delete_not_implemented(self, error_mock):
+        request = Mock()
+        response = project_delete(request, 'bitbucket')
+        error_mock.assert_called_once_with(request, 'This feature is to be implemented.')
+        self.assertEqual(200, response.status_code)
+
+
+

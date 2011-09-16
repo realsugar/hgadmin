@@ -59,6 +59,19 @@ class DeveloperValidatorTest(unittest.TestCase):
 #
 
 class DeveloperViewTest(unittest.TestCase):
+    @patch.object(Developer, 'all')
+    def test_developer_list_no_developers_yet(self, all_developers):
+        all_developers.return_value = []
+        response = developer_list(None)
+        all_developers.assert_called_once()
+
+        self.assertEqual(200, response.status_code)
+        self.assertNotEquals(-1, response.content.find('No developers yet.'))
+
+    # TODO: write test for existing developers
+    def test_developer_list(self):
+        pass
+
     def test_developer_add_GET(self):
         request = Mock()
         request.POST = None
