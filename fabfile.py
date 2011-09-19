@@ -28,4 +28,4 @@ Commands
 """
 def update():
     run('hg update')
-    run('apache2ctl restart')
+    run('echo -e The project was deployed successfully!')
