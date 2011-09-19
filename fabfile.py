@@ -8,7 +8,7 @@ env.datetime = datetime.now().strftime("%d-%m-%Y-%H-%M")
 Environments
 """
 def production():
-    env.hosts = ['root@mlsdev.com']
+    env.hosts = ['www-data@mlsdev.com']
     env.settings = 'settings'
     env.path = "/var/www/hgm"
 
@@ -27,6 +27,5 @@ def deploy():
 Commands
 """
 def update():
-    run('hg pull')
     run('hg update')
     run('apache2ctl restart')
