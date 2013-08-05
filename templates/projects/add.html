@@ -4,12 +4,12 @@
 
 <h2>Add new repository</h2>
 
-<form action="{% url project-add %}" method="post">
+<form action={% url "project-add" %} method="post">
 
 {% include "projects/project_form.html" %}
 
 </form>
 
-<a href="{% url projects-list %}">Back</a>
+<a href={% url "projects-list" %}>Back</a>
 
 {% endblock %}

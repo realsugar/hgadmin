@@ -6,8 +6,8 @@
 
 <p><i>To be implemented!</i></p>
 
-<a href="{% url developers-list %}">Back</a> |
-<a href="{% url developer-password developer.login %}">Change password</a> |
-<a href="{% url developer-delete developer.login %}">Delete</a>
+<a href={% url "developers-list" %}>Back</a> |
+<a href={% url "developer-password" developer.login %}>Change password</a> |
+<a href={% url "developer-delete" developer.login %}>Delete</a>
 
 {% endblock %}

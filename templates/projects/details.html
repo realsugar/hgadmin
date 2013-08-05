@@ -29,7 +29,7 @@
         <td>Allow push:</td>
         <td>
             {% for developer in project.allow_push %}
-                <a href="{% url developer-profile developer %}">{{ developer }}</a>&nbsp;
+                <a href={% url "developer-profile" developer %}>{{ developer }}</a>&nbsp;
             {% endfor %}
         </td>
     </tr>
@@ -38,14 +38,14 @@
         <td>Allow read:</td>
         <td>
             {% for developer in project.allow_push %}
-                <a href="{% url developer-profile developer %}">{{ developer }}</a>&nbsp;
+                <a href={% url "developer-profile" developer %}>{{ developer }}</a>&nbsp;
             {% endfor %}
         </td>
     </tr>
 </table>
 
-<a href="{% url projects-list %}">Back</a> |
-<a href="{% url project-edit project.name %}">Edit</a> |
-<a href="{% url project-delete project.name %}">Delete</a>
+<a href={% url "projects-list" %}>Back</a> |
+<a href={% url "project-edit" project.name %}>Edit</a> |
+<a href={% url "project-delete" project.name %}>Delete</a>
 
 {% endblock %}
